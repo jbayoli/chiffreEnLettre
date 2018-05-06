@@ -7,7 +7,7 @@ class DigitToLetter(valeur: Int) {
             40 to "Quarante", 50 to "Cinquante", 60 to "Soixante")
     private var _valeurEnLettre = ""
 
-    fun chiffreEnLettre(): String {
+    fun digitToLetter(): String {
         mainProcess()
         return _valeurEnLettre
     }
@@ -174,17 +174,36 @@ class DigitToLetter(valeur: Int) {
         val digit2: String
         val digit3: String
         val digitInSting: String
-        if (args in 81..89) {
+        digitInSting =  if (args in 81..89) {
             digit = getValueInMap(4)
             digit2 = processTeens(20).toLowerCase()
             digit3 = getValueInMap(args.toString().last().toString().toInt()).toLowerCase()
-            digitInSting = "$digit-$digit2-$digit3"
+            "$digit-$digit2-$digit3"
         } else {
             digit = getValueInMap(4)
             digit2 = processTeens(20).toLowerCase()
-            digitInSting = digit +"-"+ digit2 + "s"
+            digit + "-" + digit2 + "s"
         }
         return digitInSting
+    }
+
+    private  fun processninties(args: Int): String {
+        val digit: String
+        val digit2: String
+        val digit3: String
+        val digitInString: String
+        digitInString = if (args in 91..92){
+            digit = getValueInMap(4)
+            digit2 = processTeens(20).toLowerCase()
+            digit3 = processTeens(args - 80).toLowerCase()
+            "$digit-$digit2-$digit3"
+        } else {
+            digit = getValueInMap(4)
+            digit2 = processTwenties(20).toLowerCase()
+            digit3 = processTeens(args - 80).toLowerCase()
+            "$digit-$digit2-$digit3"
+        }
+        return digitInString
     }
 
     private fun mainProcess() {
@@ -197,6 +216,7 @@ class DigitToLetter(valeur: Int) {
             in 60..69 -> processSixties(_valeur)
             in 70..79 -> processSeventies(_valeur)
             in 80..89 -> processHeigties(_valeur)
+            in 90..99 -> processninties(_valeur)
             else -> getValueInMap(_valeur)
         }
     }
