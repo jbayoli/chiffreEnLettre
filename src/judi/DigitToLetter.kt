@@ -172,16 +172,17 @@ class DigitToLetter(valeur: Int) {
     private fun processHeigties(args: Int): String {
         val digit: String
         val digit2: String
-        val di
-        var digitInSting = ""
+        val digit3: String
+        val digitInSting: String
         if (args in 81..89) {
             digit = getValueInMap(4)
             digit2 = processTeens(20).toLowerCase()
-            digitInSting = "$digit-$digit2"
+            digit3 = getValueInMap(args.toString().last().toString().toInt()).toLowerCase()
+            digitInSting = "$digit-$digit2-$digit3"
         } else {
             digit = getValueInMap(4)
             digit2 = processTeens(20).toLowerCase()
-            digitInSting = "$digit-$digit2"
+            digitInSting = digit +"-"+ digit2 + "s"
         }
         return digitInSting
     }
