@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="937ae38c-6f17-48e2-bf26-c8b9a26f1bd3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chiffreEnLettre/MainKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chiffreEnLettre/MainKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chiffreEnLettre/judi/DigitToLetter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chiffreEnLettre/judi/DigitToLetter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/judi/DigitToLetter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/judi/DigitToLetter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +32,8 @@
       <file leaf-file-name="DigitToLetter.kt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/judi/DigitToLetter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="236">
+              <caret line="175" column="50" lean-forward="true" selection-start-line="175" selection-start-column="50" selection-end-line="175" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -217,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525630463233</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="turn digit to letter in french">
+      <created>1525790259494</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1525790259498</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -384,8 +387,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/judi/DigitToLetter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="236">
+          <caret line="175" column="50" lean-forward="true" selection-start-line="175" selection-start-column="50" selection-end-line="175" selection-end-column="50" />
         </state>
       </provider>
     </entry>
