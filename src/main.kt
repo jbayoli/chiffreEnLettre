@@ -1,8 +1,8 @@
 import judi.DigitToLetter
 
 fun main(args: Array<String>) {
-    for (i in 90..99) {
-        val f = DigitToLetter(i)
-        println("$i : ${f.digitToLetter()}")
+    for (i in 0..99) {
+        val  p = DigitToLetter(i)
+        println("$i : ${p.digitToLetter()}")
     }
 }
