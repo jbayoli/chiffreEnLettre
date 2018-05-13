@@ -1,7 +1,6 @@
 package judi
 
-class DigitToLetter(digit: Int = 0) {
-    private val _digitInInt: Int = digit
+class DigitToLetter {
     private var _digit: String = ""
     private var _digit2: String = ""
     private var _digit3: String = ""
@@ -10,10 +9,10 @@ class DigitToLetter(digit: Int = 0) {
     private var _numberInLetter = ""
     private val _d = mapOf(0 to "Zéro",1 to "Un", 2 to "Deux", 3 to "Trois", 4 to "Quatre", 5 to "Cinq", 6 to "Six", 7 to "Sept", 8 to "Huit", 9 to "Neuf",
             10 to "Dix", 11 to "Onze", 12 to "Douze", 13 to "Treize", 14 to "Quatorze", 15 to "Quinze", 16 to "Seize", 20 to "Vingt", 30 to "Trente",
-            40 to "Quarante", 50 to "Cinquante", 60 to "Soixante", 100 to "Cent")
+            40 to "Quarante", 50 to "Cinquante", 60 to "Soixante", 100 to "Cent", 1_000 to "Mille")
 
-    fun digitToLetter(): String {
-        mainProcess()
+    fun digitToLetter(args: Int): String {
+        mainProcess(args)
         return _numberInLetter
     }
 
@@ -156,7 +155,7 @@ class DigitToLetter(digit: Int = 0) {
     }
 
     private fun processEighties(args: Int): String {
-        _digitInSting =  if (args in 81..89) {
+        return if (args in 81..89) {
             _digit = getValueInMap(4)
             _digit2 = getValueInMap(20).toLowerCase()
             _digit3 = getValueInMap(args.toString().last().toString().toInt()).toLowerCase()
@@ -166,29 +165,58 @@ class DigitToLetter(digit: Int = 0) {
             _digit2 = getValueInMap(20).toLowerCase()
             _digit + "-" + _digit2 + "s"
         }
-        return _digitInSting
     }
 
     private  fun processNineties(args: Int): String {
         val digit = getValueInMap(4)
         val digit2 = getValueInMap(20).toLowerCase()
         val digit3 = processTeens(args - 80).toLowerCase()
-        _digitInSting = "$digit-$digit2-$digit3"
-        return _digitInSting
+        return "$digit-$digit2-$digit3"
     }
 
-    private fun mainProcess() {
-        _numberInLetter = when (_digitInInt) {
-            in 10..19 -> processTeens(_digitInInt)
-            in 20..29 -> processTwenties(_digitInInt)
-            in 30..39 -> processThirties(_digitInInt)
-            in 40..49 -> processForties(_digitInInt)
-            in 50..59 -> processFifties(_digitInInt)
-            in 60..69 -> processSixties(_digitInInt)
-            in 70..79 -> processSeventies(_digitInInt)
-            in 80..89 -> processEighties(_digitInInt)
-            in 90..99 -> processNineties(_digitInInt)
-            else -> getValueInMap(_digitInInt)
+    private fun processHundreds(args: Int): String {
+        val digitToString: String
+        return if (args > 100) {
+            val firstDigit = args.toString().first().toString().toInt()
+            val middleDigit = args.toString()[1].toString().toInt()
+            digitToString = if (firstDigit == 1) {
+                commonProcessForHundreds(middleDigit, args, firstDigit.toString())
+            } else{
+                if (args == 200 || args == 300 || args == 400 || args == 500 || args == 600 || args == 700 || args == 800 || args == 900) {
+                    "${getValueInMap(firstDigit)} ${getValueInMap(100).toLowerCase()}s"
+                } else {
+                    "${getValueInMap(firstDigit)} ${commonProcessForHundreds(middleDigit, args, firstDigit.toString()).toLowerCase()}"
+                }
+            }
+                digitToString
+        } else {
+            getValueInMap(args)
+        }
+    }
+
+    private fun commonProcessForHundreds(middleDigit: Int, digitToBeTransform: Int, firstDigit: String): String {
+        return if(middleDigit != 0) {
+            val d = digitToBeTransform.toString().removePrefix(firstDigit).toInt()
+            "${getValueInMap(100)} ${digitToLetter(d).toLowerCase()}"
+        } else {
+            val d = digitToBeTransform.toString().removeRange(0,1).toInt()
+            "${getValueInMap(100)} ${getValueInMap(d).toLowerCase()}"
+        }
+    }
+
+    private fun mainProcess(args: Int) {
+        _numberInLetter = when (args) {
+            in 10..19 -> processTeens(args)
+            in 20..29 -> processTwenties(args)
+            in 30..39 -> processThirties(args)
+            in 40..49 -> processForties(args)
+            in 50..59 -> processFifties(args)
+            in 60..69 -> processSixties(args)
+            in 70..79 -> processSeventies(args)
+            in 80..89 -> processEighties(args)
+            in 90..99 -> processNineties(args)
+            in 100..999 -> processHundreds(args)
+            else -> getValueInMap(args)
         }
     }
 }
