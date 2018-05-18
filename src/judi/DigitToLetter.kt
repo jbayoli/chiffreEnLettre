@@ -45,12 +45,10 @@ class DigitToLetter {
 
     private fun processFromTwentyToSixty(args: Int): String {
         val lastDigit = args.toString().last().toString().toInt()
-        return if (args == 30 || args == 40 || args == 50 || args == 60) {
-            getValueInMap(args)
-        } else if (args == 21 || args == 31 || args == 41 || args == 51 || args == 61) {
-            "${getValueInMap(args - lastDigit)} et ${getValueInMap(lastDigit).toLowerCase()}"
-        } else {
-            "${getValueInMap(args - lastDigit)} ${getValueInMap(lastDigit).toLowerCase()}"
+        return when (lastDigit) {
+            0 -> getValueInMap(args)
+            1 -> "${getValueInMap(args - lastDigit)} et ${getValueInMap(lastDigit).toLowerCase()}"
+            else -> "${getValueInMap(args - lastDigit)} ${getValueInMap(lastDigit).toLowerCase()}"
         }
     }
 
@@ -83,6 +81,7 @@ class DigitToLetter {
     private fun processHundreds(args: Int): String {
         val firstDigit = args.toString().first().toString().toInt()
         val middleDigit = args.toString()[1].toString().toInt()
+        val lastDigit = args.toString().last().toString().toInt()
         fun commonProcessForHundreds(): String {
             val d: Int
             return if(middleDigit != 0) {
@@ -96,7 +95,7 @@ class DigitToLetter {
         return if (firstDigit == 1) {
             commonProcessForHundreds()
         } else {
-            if (args == 200 || args == 300 || args == 400 || args == 500 || args == 600 || args == 700 || args == 800 || args == 900) {
+            if (middleDigit == 0 && lastDigit == 0) {
                 "${getValueInMap(firstDigit)} ${getValueInMap(100).toLowerCase()}s"
             } else {
                 "${getValueInMap(firstDigit)} ${commonProcessForHundreds().toLowerCase()}"
