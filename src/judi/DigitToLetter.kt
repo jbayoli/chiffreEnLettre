@@ -16,10 +16,8 @@ class DigitToLetter {
     private fun mainProcess(args: Int): String {
         return when (args) {
             in 17..19 -> processSeventeenToNineteen(args)
-            in 21..69 -> processFromTwentyToSixty(args)
-            in 70..79 -> processSeventies(args)
-            in 80..89 -> processEighties(args)
-            in 90..99 -> processNineties(args)
+            in 21..79 -> processFromTwentyToSeventies(args)
+            in 80..99 -> processEightyToNineties(args)
             in 101..999 -> processHundreds(args)
             in 1001..999999 -> processThousands(args)
             else -> getValueInMap(args)
@@ -43,39 +41,34 @@ class DigitToLetter {
         return  "${getValueInMap(args - lastDigit)}-${getValueInMap(lastDigit).toLowerCase()}"
     }
 
-    private fun processFromTwentyToSixty(args: Int): String {
+    private fun processFromTwentyToSeventies(args: Int): String {
         val lastDigit = args.toString().last().toString().toInt()
-        return when (lastDigit) {
-            0 -> getValueInMap(args)
-            1 -> "${getValueInMap(args - lastDigit)} et ${getValueInMap(lastDigit).toLowerCase()}"
-            else -> "${getValueInMap(args - lastDigit)} ${getValueInMap(lastDigit).toLowerCase()}"
-        }
-    }
-
-    private  fun processSeventies(args: Int): String {
-        return if(args in 71..79) {
-            val digitInLetter =  if (args == 71) {
+        return if(args < 70) {
+            when (lastDigit) {
+                0 -> getValueInMap(args)
+                1 -> "${getValueInMap(args - lastDigit)} et ${getValueInMap(lastDigit).toLowerCase()}"
+                else -> "${getValueInMap(args - lastDigit)} ${getValueInMap(lastDigit).toLowerCase()}"
+            }
+        } else {
+            if (lastDigit == 1) {
                 "${getValueInMap(60)} et ${getValueInMap(args - 60).toLowerCase()}"
             } else {
-                "${getValueInMap(60)}-${digitToLetter(args - 60).toLowerCase()}"
+                "${getValueInMap(60)}-${digitToLetter(args-60).toLowerCase()}"
             }
-            digitInLetter
-        } else {
-            "${getValueInMap(60)} ${getValueInMap(args - 60).toLowerCase()}"
         }
     }
 
-    private fun processEighties(args: Int): String {
+    private fun processEightyToNineties(args: Int): String {
         val lastDigit = args.toString().last().toString().toInt()
-        return if (args in 81..89) {
-            "${getValueInMap(4)}-${getValueInMap(20).toLowerCase()}-${getValueInMap(lastDigit).toLowerCase()}"
+        return if (args < 90) {
+            if (args in 81..89) {
+                "${getValueInMap(4)}-${getValueInMap(20).toLowerCase()}-${getValueInMap(lastDigit).toLowerCase()}"
+            } else {
+                "${getValueInMap(4)}-${getValueInMap(20).toLowerCase()}s"
+            }
         } else {
-            "${getValueInMap(4)}-${getValueInMap(20).toLowerCase()}s"
+            "${getValueInMap(4)}-${getValueInMap(20).toLowerCase()}-${digitToLetter(args - 80).toLowerCase()}"
         }
-    }
-
-    private  fun processNineties(args: Int): String {
-        return "${getValueInMap(4)}-${getValueInMap(20).toLowerCase()}-${digitToLetter(args - 80).toLowerCase()}"
     }
 
     private fun processHundreds(args: Int): String {
@@ -114,7 +107,7 @@ class DigitToLetter {
                 d = args.toString().removePrefix(firstDigit.toString()).toInt()
                 "${getValueInMap(1000)} ${digitToLetter(d).toLowerCase()}"
             } else if (secondDigit == 0 && thirdDigit != 0) {
-                d = args.toString().removePrefix(firstDigit.toString()).toInt()
+                d = args.toString().removePrefix("$firstDigit$secondDigit").toInt()
                 "${getValueInMap(1000)} ${digitToLetter(d).toLowerCase()}"
             } else {
                 "${getValueInMap(1000)} ${getValueInMap(lastDigit!!).toLowerCase()}"
@@ -147,7 +140,7 @@ class DigitToLetter {
         return if (args in 1000..1999) {
             commonProcessForThousands()
         } else {
-            if (secondDigit == 0 && secondDigit == 0 && lastDigit == 0){
+            if (secondDigit == 0 && thirdDigit == 0 && lastDigit == 0){
                 "${digitToLetter(firstDigit!!)} ${getValueInMap(1000).toLowerCase()}"
             } else {
                 "${digitToLetter(firstDigit!!)} ${commonProcessForThousands().toLowerCase()}"

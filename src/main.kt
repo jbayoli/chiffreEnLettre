@@ -2,5 +2,5 @@ import judi.DigitToLetter
 
 fun main(args: Array<String>) {
     val d = DigitToLetter()
-    println(d.digitToLetter(999))
+    println(d.digitToLetter(98))
 }
