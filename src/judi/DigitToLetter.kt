@@ -5,36 +5,28 @@ class DigitToLetter {
             9 to "Neuf", 10 to "Dix", 11 to "Onze", 12 to "Douze", 13 to "Treize", 14 to "Quatorze", 15 to "Quinze", 16 to "Seize", 20 to "Vingt", 30 to "Trente",
             40 to "Quarante", 50 to "Cinquante", 60 to "Soixante", 100 to "Cent", 1_000 to "Mille", 1_000_000 to "Un million")
 
-    fun digitToLetter(args: Int = 0): String {
-        return if (args >= 0) {
-            mainProcess(args)
-        } else {
-            "Les nombres négatifs ne sont pas pris en charge "
-        }
+    fun digitToLetter(args: Int = 0): String = if (args >= 0) {
+        mainProcess(args)
+    } else {
+        "Les nombres négatifs ne sont pas pris en charge "
     }
 
-    private fun mainProcess(args: Int): String {
-        return when (args) {
-            in 17..19 -> processSeventeenToNineteen(args)
-            in 21..79 -> processFromTwentyToSeventies(args)
-            in 80..99 -> processEightyToNineties(args)
-            in 101..999 -> processHundreds(args)
-            in 1001..999999 -> processThousands(args)
-            else -> getValueInMap(args)
-        }
+    private fun mainProcess(args: Int): String = when (args) {
+        in 17..19 -> processSeventeenToNineteen(args)
+        in 21..79 -> processFromTwentyToSeventies(args)
+        in 80..99 -> processEightyToNineties(args)
+        in 101..999 -> processHundreds(args)
+        in 1_001..999_999 -> processThousands(args)
+        else -> getValueInMap(args)
     }
 
-    private fun getValueInMap(args: Int): String {
-        return if (checkTheValueInTheMap(args)) {
-            _mapOfKnewDigit[args]!!
-        } else {
-            "Le chiffre $args n'est pas encore pris en charge"
-        }
+    private fun getValueInMap(args: Int): String = if (checkTheValueInTheMap(args)) {
+        _mapOfKnewDigit[args]!!
+    } else {
+        "Le chiffre $args n'est pas encore pris en charge"
     }
 
-    private fun checkTheValueInTheMap(valueToCheck: Int): Boolean {
-        return _mapOfKnewDigit.containsKey(valueToCheck)
-    }
+    private fun checkTheValueInTheMap(valueToCheck: Int): Boolean = _mapOfKnewDigit.containsKey(valueToCheck)
 
     private fun processSeventeenToNineteen(args: Int): String {
         val lastDigit = args.toString().last().toString().toInt()
